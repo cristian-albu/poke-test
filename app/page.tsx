@@ -1,12 +1,20 @@
 import client from "@/lib/client";
-import { POKEMON_LIST_OFFSET } from "@/lib/constants";
+import { POKEMON_MAX_COUNT } from "@/lib/constants";
 import HomeView from "@/views/home-view/HomeView";
+import { NamedAPIResource } from "pokenode-ts";
 import React from "react";
 
-const HomePage = async () => {
-  const initialPokemons = await client.listPokemons(0, POKEMON_LIST_OFFSET);
+async function fetchAllPokemons() {
+  const { count } = await client.listPokemons(0, 1);
+  const data = await client.listPokemons(0, count);
 
-  return <HomeView initialData={initialPokemons} />;
+  return data;
+}
+
+const HomePage = async () => {
+  const pokemons = await fetchAllPokemons();
+
+  return <HomeView initialData={pokemons.results} />;
 };
 
 export default HomePage;

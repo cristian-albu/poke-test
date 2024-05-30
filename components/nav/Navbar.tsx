@@ -14,7 +14,7 @@ export type T_Navbar = {
 
 const Navbar: FC<T_Navbar> = ({ links }) => {
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black text-white flex gap-5 shadow-md">
+    <nav className="fixed top-0 left-0 z-50 w-full bg-black text-white flex gap-5 shadow-md">
       {links &&
         links.map(({ label, href, icon }, index) => (
           <Link
