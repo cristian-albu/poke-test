@@ -13,4 +13,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Production
 
-Deployment on vercel: [poke-test]()
+Deployment on vercel: [poke-test](https://poke-test-steel.vercel.app/)
+
+## Features:
+
+- [ ] Basic components (inputs, buttons, containers, etc..).
+- [ ] Dispaly table with pokemon data.
+- [ ] Search bar and search functionality.
+- [ ] Filter component .
+- [ ] Basic pagination.
+- [ ] Dynamic pokemon pages.
+- [ ] Manual testing, fixes, optimizations and improvements.
+- [ ] Unit tests suites (jest, rtl).
