@@ -53,6 +53,7 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
   const [filteredData, setFilteredData] = useState<T_PokemonResource[]>([]);
 
   const handleCancelSearch = () => {
+    setSearchValue("");
     setSearchData([]);
   };
 
@@ -130,11 +131,19 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
         </div>
       </Container>
       <Container className="bg-white/80 backdrop-blur-md p-5 rounded-lg">
-        <PokeTable data={createTableData()} />
-        <div className="w-full flex justify-between items-center">
-          <Button onClick={handlePrevBatch}>Previous</Button>
-          <Button onClick={handleNextBatch}>Next</Button>
-        </div>
+        {searchData.length === 0 && searchValue.length !== 0 ? (
+          <p>No pokemon found...</p>
+        ) : (
+          <>
+            <PokeTable data={createTableData()} />
+            {searchData.length === 0 && filteredData.length === 0 && (
+              <div className="w-full flex justify-between items-center">
+                <Button onClick={handlePrevBatch}>Previous</Button>
+                <Button onClick={handleNextBatch}>Next</Button>
+              </div>
+            )}
+          </>
+        )}
       </Container>
     </Section>
   );

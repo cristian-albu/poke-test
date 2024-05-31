@@ -4,6 +4,7 @@ import React, {
   FC,
   InputHTMLAttributes,
   KeyboardEvent,
+  MouseEvent,
   ReactNode,
   useState,
 } from "react";
@@ -33,7 +34,8 @@ const TextInput: FC<T_TextInput> = ({
     setValue(e.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e?: MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
     buttonCallback && buttonCallback(value);
   };
 
@@ -44,6 +46,7 @@ const TextInput: FC<T_TextInput> = ({
 
   const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       if (value === "") {
         handleCancel && handleCancel();
       } else {
@@ -52,6 +55,7 @@ const TextInput: FC<T_TextInput> = ({
     }
 
     if (e.key === "Escape") {
+      e.preventDefault();
       handleClearInput();
     }
   };

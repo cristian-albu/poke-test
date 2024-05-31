@@ -32,7 +32,7 @@ const PokeRow: FC<T_PokeRow> = ({ data }) => {
         </div>
       </div>
       <div className="max-w-[50%] flex items-end md:items-center gap-3 mb-10 md:mb-0">
-        <p className="opacity-0 transition-opacity group-hover:opacity-100 w-0 md:w-auto">
+        <p className="hidden md:flex opacity-0 transition-opacity group-hover:opacity-100 w-0 md:w-auto">
           View more
         </p>
         <FaArrowRight />
