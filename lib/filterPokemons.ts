@@ -11,7 +11,7 @@ export function filterPokemonsByName(
   for (let i = 0; i < pokemons.length; i++) {
     if (
       results.length <= POKEMON_MAX_COUNT &&
-      pokemons[i].pokemon.name.includes(val)
+      pokemons[i].pokemon.name.toLowerCase().includes(val.toLowerCase())
     ) {
       results.push(pokemons[i]);
     }
