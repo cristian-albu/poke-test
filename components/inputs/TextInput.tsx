@@ -23,9 +23,10 @@ const TextInput: FC<T_TextInput> = ({
   handleCancel,
   children,
   className,
+  defaultValue,
   ...attributes
 }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(defaultValue?.toString() || "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(e);

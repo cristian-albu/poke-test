@@ -23,5 +23,5 @@ Deployment on vercel: [poke-test](https://poke-test-steel.vercel.app/)
 - [x] Filter component .
 - [x] UI improvements.
 - [x] Dynamic pokemon pages.
-- [ ] Manual testing, fixes, optimizations and improvements.
+- [x] Manual testing, fixes, optimizations and improvements.
 - [x] Unit tests suites (jest, rtl).
