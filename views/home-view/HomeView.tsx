@@ -46,7 +46,7 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
     };
   }, [initialData, types]);
 
-  const { filterData } = useFilterContext();
+  const { filterData, searchValue, setSearchValue } = useFilterContext();
 
   const [searchData, setSearchData] = useState<T_PokemonResource[]>([]);
   const [filteredData, setFilteredData] = useState<T_PokemonResource[]>([]);
@@ -56,17 +56,22 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
   };
 
   const handleSearch = (val: string) => {
-    const result = filterPokemonsByName(allPokemons, val);
-    setSearchData(result);
+    setSearchValue(val);
   };
 
   useEffect(() => {
-    const filtered = filterPokemonsByType(allPokemons, filterData);
-    if (filtered) {
-      setFilteredData(filtered);
+    if (filterData) {
+      const filtered = filterPokemonsByType(allPokemons, filterData);
+      filtered && setFilteredData(filtered);
     }
+
+    if (searchValue) {
+      const searchResults = filterPokemonsByName(allPokemons, searchValue);
+      setSearchData(searchResults);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterData]);
+  }, [filterData, searchValue]);
 
   const createTableData = () => {
     if (searchData.length === 0 && filteredData.length === 0) {
@@ -89,8 +94,14 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
   return (
     <Section>
       <Container>
+        <div className="w-full pt-[5rem] pb-5">
+          <h1 className="text-4xl">Pokemon app</h1>
+        </div>
+
         <TextInput
           icon={<FaSearch />}
+          name="search"
+          aria-label="search"
           buttonCallback={handleSearch}
           handleCancel={handleCancelSearch}
         />

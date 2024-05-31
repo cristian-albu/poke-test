@@ -82,7 +82,12 @@ const TextInput: FC<T_TextInput> = ({
         </div>
 
         {icon && (
-          <Button className={`rounded-l-none px-6`} onClick={handleButtonClick}>
+          <Button
+            className={`rounded-l-none px-6`}
+            onClick={handleButtonClick}
+            name="input button"
+            aria-label="input button"
+          >
             {icon}
           </Button>
         )}

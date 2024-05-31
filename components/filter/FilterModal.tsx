@@ -48,6 +48,7 @@ const FilterModal: FC<T_FilterModal> = ({
           className="w-full flex flex-col"
           onSubmit={(e) => e.preventDefault()}
           onChange={handleChange}
+          name="filter"
         >
           <p className="text-3xl w-full">Filter</p>
 
@@ -74,6 +75,7 @@ const FilterModal: FC<T_FilterModal> = ({
                         key={item.label}
                         id={item.label}
                         defaultChecked={defaultChecked}
+                        name={item.label}
                       >
                         {item.label}
                       </Checkbox>
@@ -85,7 +87,9 @@ const FilterModal: FC<T_FilterModal> = ({
         </form>
         <div className="w-full border-t-2 border-t-gray-200 py-3 flex justify-between mt-auto">
           <Button onClick={closeFilterModal}>Close</Button>
-          <Button onClick={handleApplyFilter}>Apply filters</Button>
+          <Button onClick={handleApplyFilter} name="apply-filters">
+            Apply filters
+          </Button>
         </div>
       </div>
     </div>
