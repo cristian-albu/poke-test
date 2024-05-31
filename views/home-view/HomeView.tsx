@@ -1,32 +1,89 @@
 "use client";
+import Filter from "@/components/filter/Filter";
+import {
+  T_FilterDataCheckbox,
+  T_FilterState,
+  T_InitialFilterDataArr,
+} from "@/components/filter/types";
+import useFilterContext from "@/components/filter/useFilterContext";
 import { TextInput } from "@/components/inputs";
 import { Container, Section } from "@/components/layout";
 import { PokeTable } from "@/components/table";
-import client from "@/lib/client";
 import { POKEMON_MAX_COUNT } from "@/lib/constants";
-import { filterPokemonsByName } from "@/lib/filterPokemons";
-import { NamedAPIResource, Pokemon } from "pokenode-ts";
-import React, { FC, useMemo, useState } from "react";
+import {
+  filterPokemonsByName,
+  filterPokemonsByType,
+} from "@/lib/filterPokemons";
+import { NamedAPIResource } from "pokenode-ts";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
+export type T_PokemonResource = { pokemon: NamedAPIResource; type: string };
+
 export type T_HomeView = {
-  initialData: NamedAPIResource[];
+  initialData: T_PokemonResource[];
+  types: string[];
 };
-const HomeView: FC<T_HomeView> = ({ initialData }) => {
-  const allPokemons = useMemo(() => initialData, [initialData]);
 
-  const pageData = allPokemons.slice(0, POKEMON_MAX_COUNT);
+const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
+  const { allPokemons, initialFilterDataArr } = useMemo(() => {
+    const pokemons = initialData;
 
-  const [displayData, setDisplayData] =
-    useState<Array<NamedAPIResource | Pokemon>>(pageData);
+    const pokemonTypesFilterData: T_FilterDataCheckbox = {
+      type: "checkbox",
+      contents: types.map((e) => ({
+        label: e,
+        default: false,
+      })),
+    };
+
+    const initialFilterDataArr: T_InitialFilterDataArr = [
+      ["Pokemon types", pokemonTypesFilterData],
+    ];
+    return {
+      allPokemons: pokemons,
+      initialFilterDataArr: initialFilterDataArr,
+    };
+  }, [initialData, types]);
+
+  const { filterData } = useFilterContext();
+
+  const [searchData, setSearchData] = useState<T_PokemonResource[]>([]);
+  const [filteredData, setFilteredData] = useState<T_PokemonResource[]>([]);
 
   const handleCancelSearch = () => {
-    setDisplayData(pageData);
+    setSearchData([]);
   };
 
-  const handleSearch = async (val: string) => {
+  const handleSearch = (val: string) => {
     const result = filterPokemonsByName(allPokemons, val);
-    setDisplayData(result);
+    setSearchData(result);
+  };
+
+  useEffect(() => {
+    const filtered = filterPokemonsByType(allPokemons, filterData);
+    if (filtered) {
+      setFilteredData(filtered);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterData]);
+
+  const createTableData = () => {
+    if (searchData.length === 0 && filteredData.length === 0) {
+      return allPokemons.slice(0, POKEMON_MAX_COUNT);
+    } else if (searchData.length === 0) {
+      return filteredData.slice(0, POKEMON_MAX_COUNT);
+    } else if (filteredData.length === 0) {
+      return searchData.slice(0, POKEMON_MAX_COUNT);
+    } else {
+      const filterted = filteredData.filter((filterItem) =>
+        searchData.some(
+          (searchItem) => filterItem.pokemon.name === searchItem.pokemon.name
+        )
+      );
+
+      return filterted.slice(0, POKEMON_MAX_COUNT);
+    }
   };
 
   return (
@@ -37,7 +94,8 @@ const HomeView: FC<T_HomeView> = ({ initialData }) => {
           buttonCallback={handleSearch}
           handleCancel={handleCancelSearch}
         />
-        <PokeTable data={displayData} />
+        <Filter initialFilterDataArr={initialFilterDataArr} />
+        <PokeTable data={createTableData()} />
       </Container>
     </Section>
   );

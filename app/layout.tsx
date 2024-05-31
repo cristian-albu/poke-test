@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/nav";
 import { navData } from "@/data/nav-data";
 import Footer from "@/components/nav/Footer";
+import FilterContextProvider from "@/components/filter/filterContext";
 
 const poppins = Poppins({ weight: ["100", "300", "500"], subsets: ["latin"] });
 
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} pt-12`}>
-        <Navbar links={navData} />
-        {children}
-        <Footer />
+        <FilterContextProvider>
+          <Navbar links={navData} />
+          {children}
+          <Footer />
+        </FilterContextProvider>
       </body>
     </html>
   );

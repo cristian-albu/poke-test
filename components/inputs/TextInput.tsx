@@ -43,7 +43,11 @@ const TextInput: FC<T_TextInput> = ({
 
   const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleButtonClick();
+      if (value === "") {
+        handleCancel && handleCancel();
+      } else {
+        handleButtonClick();
+      }
     }
 
     if (e.key === "Escape") {

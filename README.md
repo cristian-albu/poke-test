@@ -20,7 +20,7 @@ Deployment on vercel: [poke-test](https://poke-test-steel.vercel.app/)
 - [x] Basic components (inputs, buttons, containers, etc..).
 - [x] Dispaly table with pokemon data.
 - [x] Search bar and search functionality.
-- [ ] Filter component .
+- [x] Filter component .
 - [ ] Basic pagination.
 - [x] Dynamic pokemon pages.
 - [ ] Manual testing, fixes, optimizations and improvements.
