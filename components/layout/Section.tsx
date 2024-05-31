@@ -6,7 +6,7 @@ export type T_Section = HTMLAttributes<HTMLDivElement>;
 const Section: FC<T_Section> = ({ children, className, ...attributes }) => {
   return (
     <section
-      className={`w-full flex flex-col justify-center items-center p-10 ${className}`}
+      className={`w-full min-h-[100vh] flex flex-col justify-center items-center p-10 ${className}`}
       {...attributes}
     >
       {children}

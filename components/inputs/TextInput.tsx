@@ -56,12 +56,12 @@ const TextInput: FC<T_TextInput> = ({
   };
 
   return (
-    <label className="w-full flex flex-col justify-start items-start mb-5">
+    <label className="w-full flex flex-col justify-start items-start">
       <span className="w-full">{children}</span>
       <div className="w-full flex justify-stretch items-stretch">
         <div className="w-full relative">
           <input
-            className={`w-full border-2 border-gray-400 px-2 py-1 ${
+            className={`w-full border-2 border-black px-2 py-1 ${
               icon ? "rounded-l-lg" : "rounded-lg"
             } ${className}`}
             onChange={handleChange}
