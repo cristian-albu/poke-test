@@ -31,5 +31,7 @@ export function filterPokemonsByType(
     .filter(([key, val]) => val === true)
     .map(([key]) => key);
 
-  return pokemons.filter((item) => activeFilters.includes(item.type));
+  return pokemons.filter((item) =>
+    activeFilters.some((filter) => item.type.toLowerCase().includes(filter))
+  );
 }
