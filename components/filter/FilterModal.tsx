@@ -43,9 +43,9 @@ const FilterModal: FC<T_FilterModal> = ({
         className="absolute w-full h-full top-0 left-0"
         onClick={closeFilterModal}
       />
-      <div className="relative w-[30%] h-full bg-white p-5 shadow-lg rounded-lg flex flex-col overflow-auto">
+      <div className="relative w-full md:w-[30%] h-full bg-white p-5 shadow-lg rounded-lg flex flex-col ">
         <form
-          className="w-full flex flex-col"
+          className="w-full flex flex-col overflow-auto"
           onSubmit={(e) => e.preventDefault()}
           onChange={handleChange}
           name="filter"

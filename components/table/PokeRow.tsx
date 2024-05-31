@@ -12,15 +12,15 @@ const PokeRow: FC<T_PokeRow> = ({ data }) => {
   return (
     <Link
       href={data.url}
-      className="group w-full flex justify-between items-center gap-3 border-b-[1px] border-b-gray-300 mb-2"
+      className="group w-full flex flex-wrap justify-between items-center gap-1 md:gap-3 border-b-[1px] border-b-gray-300 mb-2"
     >
       <Image width={50} height={50} src={data.image} alt={data.name} />
-      <div className="flex float-start w-[30%] capitalize text-lg">
+      <div className="flex float-start w-[80%] md:w-[30%] capitalize text-lg">
         {data.name}
       </div>
 
-      <div className="flex float-start w-[30%] ">
-        <div className="flex gap-3">
+      <div className="flex flex-start w-[60%] md:w-[30%] ">
+        <div className="flex flex-start gap-3">
           {data.type.split(", ").map((type) => (
             <p
               key={type}
@@ -31,8 +31,8 @@ const PokeRow: FC<T_PokeRow> = ({ data }) => {
           ))}
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <p className="opacity-0 transition-opacity group-hover:opacity-100">
+      <div className="max-w-[50%] flex items-end md:items-center gap-3 mb-10 md:mb-0">
+        <p className="opacity-0 transition-opacity group-hover:opacity-100 w-0 md:w-auto">
           View more
         </p>
         <FaArrowRight />

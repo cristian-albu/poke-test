@@ -18,10 +18,10 @@ const Checkbox: FC<T_Checkbox> = ({
   };
 
   return (
-    <label className="flex justify-center items-center gap-1 cursor-pointer mb-3">
-      <div className="w-[1.2rem] h-[1.2rem] border-2 border-gray-400 rounded-sm">
+    <label className="group flex justify-center items-center gap-1 cursor-pointer mb-3">
+      <div className="w-[1.2rem] h-[1.2rem] border-2 border-black rounded-sm group-hover:border-blue-500">
         <FaCheck
-          className={`transition-opacity ${
+          className={`transition-opacity text-blue-500 ${
             checked ? "opacity-100" : "opacity-0"
           }`}
         />

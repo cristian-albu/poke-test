@@ -12,8 +12,8 @@ const PokemonView: FC<T_PokemonView> = ({ data }) => {
   return (
     <Section className="bg-[url('/background_1.png')] bg-cover">
       <Container className="justify-center items-center">
-        <div className="w-full flex justify-start items-center ">
-          <div className="relative w-[300px] h-[450px]  px-5 py-3 rounded-lg shadow-2xl bg-white/50 backdrop-blur-xl overflow-hidden border-l-2 border-l-gray-600 border-b-2 border-b-gray-600 transition-all hover:scale-[1.03] hover:brightness-[1.03]">
+        <div className="w-full flex justify-start items-center flex-wrap">
+          <div className="relative w-full md:w-[300px] md:h-[450px]  px-5 py-3 rounded-lg shadow-2xl bg-white/50 backdrop-blur-xl overflow-hidden border-l-2 border-l-gray-600 border-b-2 border-b-gray-600 transition-all hover:scale-[1.03] hover:brightness-[1.03]">
             <div className="absolute w-full h-full top-0 left-0 opacity-5">
               <Image
                 fill
@@ -51,7 +51,7 @@ const PokemonView: FC<T_PokemonView> = ({ data }) => {
             </div>
           </div>
 
-          <div className="flex flex-col justify-start gap-1 items-start p-10">
+          <div className="flex flex-col justify-start gap-1 items-start mt-10 md:mt-0  bg-white/50 md:bg-transparent rounded-lg p-5 md:p-10 w-full md:w-auto">
             <h1 className="capitalize text-3xl mb-2 bg-black p-3 text-white rounded-lg">
               {data.name}{" "}
             </h1>
