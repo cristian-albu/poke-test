@@ -4,8 +4,13 @@ import { FaCheck } from "react-icons/fa";
 
 export type T_Checkbox = InputHTMLAttributes<HTMLInputElement>;
 
-const Checkbox: FC<T_Checkbox> = ({ children, onChange, ...attributes }) => {
-  const [checked, setChecked] = useState(attributes.checked || false);
+const Checkbox: FC<T_Checkbox> = ({
+  children,
+  onChange,
+  defaultChecked,
+  ...attributes
+}) => {
+  const [checked, setChecked] = useState(defaultChecked || false);
 
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(e);

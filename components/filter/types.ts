@@ -11,7 +11,7 @@ export type T_FilterInitialData = {
 export type T_InitialFilterDataArr = [string, T_FilterDataCheckbox][];
 
 export type T_FilterState = {
-  [key: string]: boolean | number;
+  [key: string]: boolean;
 };
 
 export type T_FilterModal = {

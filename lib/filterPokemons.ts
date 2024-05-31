@@ -1,3 +1,4 @@
+import { T_FilterState } from "@/components/filter/types";
 import { POKEMON_MAX_COUNT } from "./constants";
 import { T_PokemonResource } from "@/views/home-view/HomeView";
 
@@ -17,4 +18,18 @@ export function filterPokemonsByName(
   }
 
   return results;
+}
+
+export function filterPokemonsByType(
+  pokemons: T_PokemonResource[],
+  filterData: T_FilterState | null
+) {
+  if (filterData === null) {
+    return null;
+  }
+  const activeFilters = Object.entries(filterData)
+    .filter(([key, val]) => val === true)
+    .map(([key]) => key);
+
+  return pokemons.filter((item) => activeFilters.includes(item.type));
 }
