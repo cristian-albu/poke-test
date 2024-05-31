@@ -15,6 +15,7 @@ const PokeRow: FC<T_PokeRow> = ({ data }) => {
     >
       <Image width={50} height={50} src={data.image} alt={data.name} />
       <div className="flex float-start flex-grow capitalize">{data.name}</div>
+      <div>{data.type}</div>
       <p className="opacity-0 transition-opacity group-hover:opacity-100">
         View more
       </p>

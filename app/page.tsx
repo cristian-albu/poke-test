@@ -16,12 +16,12 @@ async function fetchAllPokemons() {
   // Wait for all fetch operations to complete
   const allPokemonsGroupedByTypes = await Promise.all(allTypesNames);
 
-  return allPokemonsGroupedByTypes.map((group) => {
-    return {
-      pokemons: group.pokemon.map((item) => item.pokemon),
+  return allPokemonsGroupedByTypes.map((group) =>
+    group.pokemon.map((item) => ({
+      pokemon: item.pokemon,
       type: group.name,
-    };
-  });
+    }))
+  );
 }
 
 const HomePage = async () => {
