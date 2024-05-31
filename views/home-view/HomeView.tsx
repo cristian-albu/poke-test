@@ -17,6 +17,7 @@ import {
 import { NamedAPIResource } from "pokenode-ts";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { MdCatchingPokemon } from "react-icons/md";
 
 export type T_PokemonResource = { pokemon: NamedAPIResource; type: string };
 
@@ -92,20 +93,26 @@ const HomeView: FC<T_HomeView> = ({ initialData, types }) => {
   };
 
   return (
-    <Section>
-      <Container>
-        <div className="w-full pt-[5rem] pb-5">
-          <h1 className="text-4xl">Pokemon app</h1>
+    <Section className="bg-[url('/background_1.png')] bg-cover">
+      <Container className="mb-5">
+        <div className="w-full pt-[5rem] pb-1 flex">
+          <h1 className="text-4xl text-white mb-2 py-3 px-4 bg-black rounded-lg flex gap-3 items-center">
+            <MdCatchingPokemon />
+            Pokemon app
+          </h1>
         </div>
-
-        <TextInput
-          icon={<FaSearch />}
-          name="search"
-          aria-label="search"
-          buttonCallback={handleSearch}
-          handleCancel={handleCancelSearch}
-        />
-        <Filter initialFilterDataArr={initialFilterDataArr} />
+        <div className="w-full flex items-center gap-5 mb-5">
+          <TextInput
+            icon={<FaSearch />}
+            name="search"
+            aria-label="search"
+            buttonCallback={handleSearch}
+            handleCancel={handleCancelSearch}
+          />
+          <Filter initialFilterDataArr={initialFilterDataArr} />
+        </div>
+      </Container>
+      <Container className="bg-white/80 backdrop-blur-md p-5 rounded-lg">
         <PokeTable data={createTableData()} />
       </Container>
     </Section>

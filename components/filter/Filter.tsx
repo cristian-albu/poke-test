@@ -4,6 +4,7 @@ import { T_FilterProps } from "./types";
 import { FC, useState } from "react";
 import { Button } from "../layout";
 import FilterModal from "./FilterModal";
+import { FaFilter } from "react-icons/fa";
 
 const Filter: FC<T_FilterProps> = ({ initialFilterDataArr }) => {
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -18,7 +19,10 @@ const Filter: FC<T_FilterProps> = ({ initialFilterDataArr }) => {
 
   return (
     <>
-      <Button onClick={toggleFilterModal}>Filter</Button>
+      <Button onClick={toggleFilterModal}>
+        <FaFilter />
+        Filter
+      </Button>
 
       {showFilterModal &&
         createPortal(
