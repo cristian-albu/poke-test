@@ -10,10 +10,17 @@ import React, { FC, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 export type T_HomeView = {
-  initialData: NamedAPIResource[];
+  initialData: {
+    pokemons: NamedAPIResource[];
+    type: string;
+  }[];
 };
+
 const HomeView: FC<T_HomeView> = ({ initialData }) => {
-  const allPokemons = useMemo(() => initialData, [initialData]);
+  const allPokemons = useMemo(
+    () => initialData.map((e) => e.pokemons).flat(1),
+    [initialData]
+  );
 
   const pageData = allPokemons.slice(0, POKEMON_MAX_COUNT);
 

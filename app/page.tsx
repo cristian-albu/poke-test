@@ -1,20 +1,33 @@
 import client from "@/lib/client";
-import { POKEMON_MAX_COUNT } from "@/lib/constants";
 import HomeView from "@/views/home-view/HomeView";
-import { NamedAPIResource } from "pokenode-ts";
 import React from "react";
 
 async function fetchAllPokemons() {
-  const { count } = await client.listPokemons(0, 1);
-  const data = await client.listPokemons(0, count);
+  // Fetch the total count of types
+  const { count } = await client.listTypes(0, 1);
+  // Fetch all types at once
+  const allTypes = await client.listTypes(0, count);
 
-  return data;
+  // Fetch details of each type in parallel
+  const allTypesNames = allTypes.results.map((type) =>
+    client.getTypeByName(type.name)
+  );
+
+  // Wait for all fetch operations to complete
+  const allPokemonsGroupedByTypes = await Promise.all(allTypesNames);
+
+  return allPokemonsGroupedByTypes.map((group) => {
+    return {
+      pokemons: group.pokemon.map((item) => item.pokemon),
+      type: group.name,
+    };
+  });
 }
 
 const HomePage = async () => {
-  const pokemons = await fetchAllPokemons();
+  const pokemonGroups = await fetchAllPokemons();
 
-  return <HomeView initialData={pokemons.results} />;
+  return <HomeView initialData={pokemonGroups} />;
 };
 
 export default HomePage;
